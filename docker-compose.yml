@@ -25,6 +25,10 @@ services:
     ports:
       - "8888:8888"
     restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=development
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/frcalderon/config-properties.git
+      - DISCOVERY_SERVER_URL=http://host.docker.internal:8761/eureka
     networks:
       demo:
         aliases:
@@ -51,6 +55,9 @@ services:
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE=development
+      - CONFIG_SERVER_URL=http://host.docker.internal:8888
+      - DISCOVERY_SERVER_URL=http://host.docker.internal:8761/eureka
+
     networks:
       demo:
         aliases:
@@ -96,6 +103,9 @@ services:
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE=development
+      - CONFIG_SERVER_URL=http://host.docker.internal:8888
+      - DISCOVERY_SERVER_URL=http://host.docker.internal:8761/eureka
+      - KEYCLOAK_REALM_URL=http://host.docker.internal:8081/realms/demo
     networks:
       demo:
         aliases:
